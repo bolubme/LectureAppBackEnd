@@ -6,6 +6,7 @@ const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 3030;
 const { ObjectId } = require("mongodb");
+const morgan = require("morgan");
 app.set("json spaces", 3);
 
 // MongoDB Connection
@@ -32,6 +33,8 @@ client
 
 // Middleware
 app.use(cors());
+
+app.use(morgan("short"))
 app.use(bodyParser.json());
 app.use(express.json());
 app.use((_req, res, next) => {
@@ -87,6 +90,27 @@ app.put("/collections/:collectionName/:id", function (req, res, next) {
 });
 
 // Search. 
+app.get('/collections/:collectionName/search/:searchWord', (req, res, next) => {
+  const { searchWord } = req.params;
+
+  req.collection.find({}).toArray((err, results) => {
+      if (err) {
+          return next(err);
+      }
+
+      const filteredList = results.filter((lesson) => {
+        const subjectMatch = lesson.subject && lesson.subject.toLowerCase().includes(searchWord.toLowerCase());
+        const locationMatch = lesson.location && lesson.location.toLowerCase().includes(searchWord.toLowerCase());
+        return subjectMatch || locationMatch;
+    });
+    
+
+      res.send(filteredList);
+  });
+});
+
+
+
 
 // Start Express server
 app.listen(port, () => {
