@@ -5,6 +5,7 @@ const cors = require("cors");
 
 const app = express();
 const port = process.env.PORT || 3030;
+const { ObjectId } = require("mongodb");
 app.set("json spaces", 3);
 
 // MongoDB Connection
@@ -66,6 +67,26 @@ app.post("/collections/:collectionName", function (req, res, next) {
     res.send(results);
   });
 });
+
+// Put - to update Course Id. 
+app.put("/collections/:collectionName/:id", function (req, res, next) {
+  req.collection.updateOne(
+    { _id: new ObjectId(req.params.id) },
+    { $set: req.body },
+    { safe: true, multi: false },
+    function (err, result) {
+      if (err) {
+        return next(err);
+      } else {
+        res.send(
+          result.matchedCount === 1 ? { msg: "success" } : { msg: "error" }
+        );
+      }
+    }
+  );
+});
+
+// Search. 
 
 // Start Express server
 app.listen(port, () => {
