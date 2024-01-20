@@ -2,6 +2,8 @@ const express = require("express");
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require("path");
+const fs = require("fs");
 
 const app = express();
 const port = process.env.PORT || 3030;
@@ -32,15 +34,19 @@ client
   .catch((err) => console.error("Error connecting to MongoDB:", err));
 
 // Middleware
-app.use(cors());
 
-app.use(morgan("short"))
+app.use(cors());
+app.use(morgan("short"));
 app.use(bodyParser.json());
 app.use(express.json());
 app.use((_req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   next();
 });
+
+
+
+
 
 // Root Path
 app.get("/", (_req, res, _next) => {
@@ -71,7 +77,7 @@ app.post("/collections/:collectionName", function (req, res, next) {
   });
 });
 
-// Put - to update Course Id. 
+// Put - to update Course Id.
 app.put("/collections/:collectionName/:id", function (req, res, next) {
   req.collection.updateOne(
     { _id: new ObjectId(req.params.id) },
@@ -89,27 +95,45 @@ app.put("/collections/:collectionName/:id", function (req, res, next) {
   );
 });
 
-// Search. 
-app.get('/collections/:collectionName/search/:searchWord', (req, res, next) => {
+// Search.
+app.get("/collections/:collectionName/search/:searchWord", (req, res, next) => {
   const { searchWord } = req.params;
 
   req.collection.find({}).toArray((err, results) => {
-      if (err) {
-          return next(err);
-      }
+    if (err) {
+      return next(err);
+    }
 
-      const filteredList = results.filter((lesson) => {
-        const subjectMatch = lesson.subject && lesson.subject.toLowerCase().includes(searchWord.toLowerCase());
-        const locationMatch = lesson.location && lesson.location.toLowerCase().includes(searchWord.toLowerCase());
-        return subjectMatch || locationMatch;
+    const filteredList = results.filter((lesson) => {
+      const subjectMatch =
+        lesson.subject &&
+        lesson.subject.toLowerCase().includes(searchWord.toLowerCase());
+      const locationMatch =
+        lesson.location &&
+        lesson.location.toLowerCase().includes(searchWord.toLowerCase());
+      return subjectMatch || locationMatch;
     });
-    
 
-      res.send(filteredList);
+    res.send(filteredList);
   });
 });
 
 
+app.use("/images", express.static(path.join(__dirname, "..", "Front-end", "images")));
+
+// Custom middleware to handle image not found
+app.use("/images/:imageName", (req, res, next) => {
+  const imagePath = path.join(__dirname, "..", "Front-end", "images", req.params.imageName);
+  fs.access(imagePath, fs.constants.R_OK, (err) => {
+    if (err) {
+      // Image not found
+      res.status(404).send("Resource not found");
+    } else {
+      // Image found, continue serving it
+      next();
+    }
+  });
+});
 
 
 // Start Express server
