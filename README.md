@@ -30,7 +30,9 @@ To get started with this project, follow these steps:
 
 3. Create a `.env` file in the root directory and add your MongoDB URI:
 
-4. Start ther server
+4. See the LectureApp.lectues.json file to see structure of Database
+
+5. Start ther server
 
    
 ## API Endpoints
