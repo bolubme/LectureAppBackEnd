@@ -10,10 +10,8 @@ const port = process.env.PORT || 3030;
 const { ObjectId } = require("mongodb");
 const morgan = require("morgan");
 app.set("json spaces", 3);
-
-// MongoDB Connection
-const uri =
-  "mongodb+srv://WebstoreUser:Ifeoluwa123456%3F@webstorecluster.yr6n0av.mongodb.net/?retryWrites=true&w=majority";
+const config = require("./config");
+const uri = config.mongoURI;
 
 const client = new MongoClient(uri, {
   serverApi: {
