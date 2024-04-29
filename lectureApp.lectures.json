@@ -1,0 +1,120 @@
+[{
+  "_id": {
+    "$oid": "65a678df763238d1e4eea49b"
+  },
+  "id": 1005,
+  "subject": "Biology",
+  "location": "Arsenal",
+  "price": 300,
+  "image": "images/biology.jpg",
+  "availableInventory": 5,
+  "rating": 4
+},
+{
+  "_id": {
+    "$oid": "65a678df763238d1e4eea49c"
+  },
+  "id": 1006,
+  "subject": "History",
+  "location": "Watford",
+  "price": 500,
+  "image": "images/history.jpg",
+  "availableInventory": 5,
+  "rating": 5
+},
+{
+  "_id": {
+    "$oid": "65a678df763238d1e4eea49e"
+  },
+  "id": 1008,
+  "subject": "Training",
+  "location": "Hendon",
+  "price": 400,
+  "image": "images/training.jpg",
+  "availableInventory": 5,
+  "rating": 3
+},
+{
+  "_id": {
+    "$oid": "65a678df763238d1e4eea49f"
+  },
+  "id": 1009,
+  "subject": "Science",
+  "location": "Camden",
+  "price": 50,
+  "image": "images/science.jpg",
+  "availableInventory": 5,
+  "rating": 5
+},
+{
+  "_id": {
+    "$oid": "65a678df763238d1e4eea497"
+  },
+  "id": 1001,
+  "subject": "Mathematics",
+  "location": "Wembly",
+  "price": 200,
+  "image": "images/mathematics.jpg",
+  "availableInventory": 5,
+  "rating": 2
+},
+{
+  "_id": {
+    "$oid": "65a678df763238d1e4eea498"
+  },
+  "id": 1002,
+  "subject": "Spelling",
+  "location": "Hendon",
+  "price": 300,
+  "image": "images/spelling.jpg",
+  "availableInventory": 5,
+  "rating": 3
+},
+{
+  "_id": {
+    "$oid": "65a678df763238d1e4eea499"
+  },
+  "id": 1003,
+  "subject": "Reading",
+  "location": "Brent Cross",
+  "price": 700,
+  "image": "images/reading.jpg",
+  "availableInventory": 5,
+  "rating": 5
+},
+{
+  "_id": {
+    "$oid": "65a678df763238d1e4eea49a"
+  },
+  "id": 1004,
+  "subject": "Spelling",
+  "location": "Edgware",
+  "price": 400,
+  "image": "images/spelling.jpg",
+  "availableInventory": 5,
+  "rating": 4
+},
+{
+  "_id": {
+    "$oid": "65a678df763238d1e4eea49d"
+  },
+  "id": 1007,
+  "subject": "Science",
+  "location": "Lambeth",
+  "price": 300,
+  "image": "images/science.jpg",
+  "availableInventory": 5,
+  "rating": 3
+},
+{
+  "_id": {
+    "$oid": "65a678df763238d1e4eea4a0"
+  },
+  "id": 1010,
+  "subject": "Mathematics",
+  "location": "Arsenal",
+  "price": 500,
+  "image": "images/mathematics.jpg",
+  "availableInventory": 5,
+  "rating": 5
+}]
